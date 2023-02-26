@@ -15,14 +15,14 @@ const ListItem = (props) => {
     
     return (
         <div className="row text-center">   
-            <div className="col-3 border bg-light">
+            <div className="col-3 border bg-light py-2">
                 <span className="edit-listItem" onClick={()=> handleEditClick(item.index)}><i className="bi bi-pencil"></i></span>
                 <span className="delete-listItem" onClick={()=> handleDeleteClick(item.index)}><i className="bi bi-trash3"></i></span>
             </div>
-            <div className="col-3 border bg-light">{item.name}</div>
-            <div className="col-1 border bg-light">{item.age}</div>
-            <div className="col-3 border bg-light">{item.city}</div>
-            <div className="col-2 border bg-light">{item.gender}</div>
+            <div className="col-3 border bg-light py-2">{item.name}</div>
+            <div className="col-1 border bg-light py-2">{item.age}</div>
+            <div className="col-3 border bg-light py-2">{item.city}</div>
+            <div className="col-2 border bg-light py-2">{item.gender}</div>
         </div>
     )
 }

@@ -1,5 +1,15 @@
+.App{
+    overflow: hidden;
+}
+
 .popup .modal {
+    background-color: rgba(0, 0, 0, 0.7);
     display: block;
+}
+
+.popup .modal .modal-dialog{
+    top: 40%;
+    transform: translateY(-40%);
 }
 
 .edit-listItem,
