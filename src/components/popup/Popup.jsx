@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 
 const Popup = (props) => {
 
-    const {showDialog, setShowDialog, postData, putData} = props;
+    const {showDialog, setShowDialog, postData, putData, editItem} = props;
     const [formData, setFormData] = useState({
         name: '',
         age: '',
@@ -34,6 +34,15 @@ const Popup = (props) => {
             gender: ''
         });
     }
+
+    useEffect(()=>{
+        setFormData({
+            name: editItem.name,
+            age: editItem.age,
+            city: editItem.city,
+            gender: editItem.gender
+        })
+    },[editItem])
 
     return(
         <div>

@@ -8,6 +8,14 @@ const Dashboard = () => {
     const [showDialog, setShowDialog] = useState(false);
     const [toggle, setToggle] = useState(false);
     const [items, setItems] = useState([]);
+    const [editItem, setEditItem] = useState({
+        name: '',
+        age: '',
+        city: '',
+        gender: '',
+        edit: false,
+        index: -1,
+    });
 
     const getData = () => {
         const items = JSON.parse(localStorage.getItem('items'));
@@ -17,10 +25,14 @@ const Dashboard = () => {
     }
 
     const postData = (obj) => {
-        let postData = [...items];
-        postData.push(obj);
-        localStorage.setItem('items', JSON.stringify(postData));
-        setToggle(!toggle);
+        if(editItem.edit) {
+            putData(editItem.index, obj);
+        } else {
+            let postData = [...items];
+            postData.push(obj);
+            localStorage.setItem('items', JSON.stringify(postData));
+            setToggle(!toggle);
+        }
     }
 
     const deleteData = (index) => {
@@ -32,16 +44,18 @@ const Dashboard = () => {
     const getEditItem = (index) => {
         let filterData = items.filter((item, i) => i === index);
         console.log(filterData[0]);
+        setEditItem({...filterData[0], edit: true, index: index});
     }
 
     const putData = (index, obj) => {
         let data = [...items];
         data.forEach((item,i) => {
             if(i == index) {
-                item = {...obj};
+                data[index] = {...obj};
             }
         });
-        console.log(data);
+        localStorage.setItem('items', JSON.stringify(data));
+        setToggle(!toggle);
     }
 
     useEffect(()=>{
@@ -52,7 +66,7 @@ const Dashboard = () => {
         <div>
             <Header setShowDialog={setShowDialog}></Header>
             <List items={items} deleteData={deleteData} getEditItem={getEditItem} setShowDialog={setShowDialog}></List>
-            <Popup showDialog={showDialog} setShowDialog={setShowDialog} postData={postData} putData={putData}></Popup>
+            <Popup showDialog={showDialog} setShowDialog={setShowDialog} postData={postData} putData={putData} editItem={editItem}></Popup>
         </div>
     )
 }
